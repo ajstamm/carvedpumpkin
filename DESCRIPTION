@@ -1,0 +1,29 @@
+Package: carvedpumpkin
+Type: Package
+Title: Carve a jack-o-lantern
+Version: 0.1.0
+Author: Abigail Stamm
+Maintainer: Abigail Stamm <abigailstamm@gmail.com>
+Description: This package contains a set of functions to draw a carved 
+   jack-o-lantern.This package was started in 2002 and a new carved image 
+   is added each year.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Imports: 
+    dplyr,
+    graphics, 
+    grDevices,
+    ggforce,
+    ggplot2,
+    tibble,
+Suggests: 
+    knitr,
+    rmarkdown,
+    tools,
+RoxygenNote: 7.2.3
+VignetteBuilder: knitr
+Roxygen: list(markdown = TRUE)
+URL: https://github.com/ajstamm/carvedpumpkin
+BugReports: https://github.com/ajstamm/carvedpumpkin/issues
+
