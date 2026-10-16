@@ -4,22 +4,37 @@
 \alias{draw_jackolantern}
 \title{Carve your jack-o-lantern}
 \usage{
-draw_jackolantern(message = "Happy Autumn!", shape = "face")
+draw_jackolantern(
+  message = "Happy Autumn!",
+  carving = "face",
+  time = "night",
+  season = "autumn",
+  vegetable = "pumpkin"
+)
 }
 \arguments{
-\item{message}{A text string.}
+\item{message}{String; the message you want to display on your image.}
 
-\item{shape}{The image to carve on your pumpkin. Currently accepts "face"
-and "cat".}
+\item{carving}{String; the image to carve on your jack-o-lantern.
+Accepts "smile", "bat", "ghost", and "cat".}
+
+\item{time}{String; time of day. Accepts "day", "dawn", "dusk", and
+"night".}
+
+\item{season}{String; season of the year (US). Accepts "spring", "summer",
+"autumn", and "winter".}
+
+\item{vegetable}{String; vegetable to carve. Accepts "pumpkin" and "turnip".
+
+This function draws a jack-o-lantern for you based on the settings you
+choose.}
 }
 \description{
 Carve your jack-o-lantern
 }
 \examples{
 
-pumpkin <- draw_jackolantern()
-print(pumpkin)
-
-
+draw_jackolantern(carving = "smile", time = "night", season = "autumn",
+                  message = "This is a test!", vegetable = "turnip")
 
 }
