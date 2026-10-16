@@ -4,7 +4,7 @@ Halloween 2026
 
 * restructured functions to allow more customization
 * converted rasters to gradients
-* added time-based options to the background
+* added time-based options to the background and message
 * added two new carving options
 * added a new vegetable to carve
 

@@ -9,7 +9,8 @@ draw_jackolantern(
   carving = "face",
   time = "night",
   season = "autumn",
-  vegetable = "pumpkin"
+  vegetable = "pumpkin",
+  font_size = 10
 )
 }
 \arguments{
@@ -24,7 +25,9 @@ Accepts "smile", "bat", "ghost", and "cat".}
 \item{season}{String; season of the year (US). Accepts "spring", "summer",
 "autumn", and "winter".}
 
-\item{vegetable}{String; vegetable to carve. Accepts "pumpkin" and "turnip".
+\item{vegetable}{String; vegetable to carve. Accepts "pumpkin" and "turnip".}
+
+\item{font_size}{Numeric; message font size.
 
 This function draws a jack-o-lantern for you based on the settings you
 choose.}

@@ -8,6 +8,7 @@
 #' @param season    String; season of the year (US). Accepts "spring", "summer",
 #'                  "autumn", and "winter".
 #' @param vegetable String; vegetable to carve. Accepts "pumpkin" and "turnip".
+#' @param font_size Numeric; message font size.
 #'
 #' This function draws a jack-o-lantern for you based on the settings you
 #' choose.
@@ -23,10 +24,11 @@
 
 draw_jackolantern <- function(message = "Happy Autumn!", carving = "face",
                               time = "night", season = "autumn",
-                              vegetable = "pumpkin") {
+                              vegetable = "pumpkin", font_size = 10) {
   # create background ----
   image <- create_background(time = time, season = season)
-  image <- write_message(image, note = message)
+  image <- write_message(image, note = message, time = time,
+                         font_size = font_size)
   # grow pumpkin ----
   if (vegetable == "pumpkin") {
     image <- grow_pumpkin(image)
