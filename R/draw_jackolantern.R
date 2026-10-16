@@ -1,28 +1,47 @@
 #' Carve your jack-o-lantern
 #'
-#' @param message A text string.
-#' @param shape   The image to carve on your pumpkin. Currently accepts "face"
-#'                and "cat".
+#' @param message   String; the message you want to display on your image.
+#' @param carving   String; the image to carve on your jack-o-lantern.
+#'                  Accepts "smile", "bat", "ghost", and "cat".
+#' @param time      String; time of day. Accepts "day", "dawn", "dusk", and
+#'                  "night".
+#' @param season    String; season of the year (US). Accepts "spring", "summer",
+#'                  "autumn", and "winter".
+#' @param vegetable String; vegetable to carve. Accepts "pumpkin" and "turnip".
+#'
+#' This function draws a jack-o-lantern for you based on the settings you
+#' choose.
 #'
 #' @examples
 #'
-#' pumpkin <- draw_jackolantern()
-#' print(pumpkin)
-#'
-#'
+#' draw_jackolantern(carving = "smile", time = "night", season = "autumn",
+#'                   message = "This is a test!", vegetable = "turnip")
 #'
 #' @export
+#'
 
 
-draw_jackolantern <- function(message = "Happy Autumn!", shape = "face") {
-  # draw pumpkin
-  image <- create_pumpkin()
-  image <- create_message(image, note = message)
-  # pumpkin design ----
-  if (shape == "face") {
-    image <- create_face(image)
-  } else if (shape == "cat") {
-    image <- create_cat(image)
+draw_jackolantern <- function(message = "Happy Autumn!", carving = "face",
+                              time = "night", season = "autumn",
+                              vegetable = "pumpkin") {
+  # create background ----
+  image <- create_background(time = time, season = season)
+  image <- write_message(image, note = message)
+  # grow pumpkin ----
+  if (vegetable == "pumpkin") {
+    image <- grow_pumpkin(image)
+  } else if (vegetable == "turnip") {
+    image <- grow_turnip(image)
+  }
+  # carve pumpkin ----
+  if (carving == "smile") {
+    image <- carve_smile(image)  |> add_candle(vertical_offset = -40)
+  } else if (carving == "cat")   {
+    image <- carve_cat(image)   |> add_candle(vertical_offset = -20)
+  } else if (carving == "ghost") {
+    image <- carve_ghost(image) |> add_candle(vertical_offset = -70)
+  } else if (carving == "bat")   {
+    image <- carve_bat(image)   |> add_candle(vertical_offset = -20)
   }
   # return image ----
   return(image)

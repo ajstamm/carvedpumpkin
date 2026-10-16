@@ -6,10 +6,13 @@
 #' @param image A ggplot object.
 #' @param note  A text string.
 #'
+#' @examples
+#' create_background() |> write_message("Hello!")
+#'
 #'
 #'
 
-create_message <- function(image, note = "Boo") {
+write_message <- function(image, note = "Boo") {
   p <- image +
     ggplot2::annotate("text", x = 498, y = 602, label = note,
                       color = "chocolate3", size = 10, family = "serif") +

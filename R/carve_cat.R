@@ -2,11 +2,21 @@
 #'
 #'
 #' @param image A ggplot object.
+#'
+#' This function carves a cat in the jack-o-lantern.
+#'
+#' @examples
+#' image <- create_background() |> grow_pumpkin()
+#' carve_cat(image)
+#'
 
-create_cat <- function(image) {
+carve_cat <- function(image) {
   # cat - on broom? or with hat?
+  # bounds: x = 300:700, y = 180:250
+  vertical_offset <- -40
+
   xplus <- 320
-  yplus <- 160
+  yplus <- 160 + vertical_offset
   # legs ----
   leftfore <- data.frame(
     x = c( 0, 20, 30, 40, 50, 40, 10,  5) * 3 + xplus,
@@ -35,12 +45,6 @@ create_cat <- function(image) {
     x = c(30, 50, 80, 90, 95, 90, 70, 30) * 3 + xplus,
     y = c(50, 55, 40, 30, 20, 10, 10, 30) * 3 + yplus
   )
-  # candle ----
-  candle <- data.frame(
-    x = c(50, 45, 45, 50, 50, 55, 50, 55) * 3 + xplus,
-    y = c(20, 25, 30, 35, 40, 35, 30, 25) * 3 + yplus
-  )
-
   # draw image ----
   p <- image + # pumpkin: cat body
     ggforce::geom_shape(head,
@@ -74,24 +78,6 @@ create_cat <- function(image) {
                                                y = !!dplyr::sym("y")),
                         radius = grid::unit(0.01, "native"),
                         color = "yellow", fill = "yellow")
-
-  # add candle to image ----
-  p <- p + # pumpkin: candle
-    ggforce::geom_shape(candle,
-                        mapping = ggplot2::aes(x = !!dplyr::sym("x"),
-                                               y = !!dplyr::sym("y")),
-                        radius = grid::unit(0.01, "native"), fill = "gold1",
-                        color = "yellow", expand = grid::unit(0.5, 'mm')) +
-    ggforce::geom_shape(candle,
-                        mapping = ggplot2::aes(x = !!dplyr::sym("x"),
-                                               y = !!dplyr::sym("y")),
-                        radius = grid::unit(0.005, "native"), fill = "darkgoldenrod1",
-                        color = "gold1", expand = grid::unit(-0.5, 'mm')) +
-    ggforce::geom_shape(candle,
-                        mapping = ggplot2::aes(x = !!dplyr::sym("x"),
-                                               y = !!dplyr::sym("y")),
-                        radius = grid::unit(0, "native"), fill = "darkorange",
-                        color = "darkgoldenrod1", expand = grid::unit(-1, 'mm'))
 
   # return image ----
   return(p)
