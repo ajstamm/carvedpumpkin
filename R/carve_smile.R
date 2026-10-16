@@ -1,6 +1,7 @@
 #' Carve a smiling face
 #'
-#' @param image A ggplot object.
+#' @param image     Plot object; backdrop for the image.
+#' @param vegetable String; vegetable to carve. Accepts "pumpkin" and "turnip".
 #'
 #' This function carves a smiling face in the jack-o-lantern.
 #'
@@ -9,9 +10,14 @@
 #' carve_smile(image)
 #'
 
-carve_smile <- function(image) {
+carve_smile <- function(image, vegetable = "pumpkin") {
   # bounds: x = 300:700, y = 180:250
   vertical_offset <- -40
+  cols <- list(
+    pumpkin = "goldenrod1",
+    turnip = "lavenderblush3"
+  )
+  my_col = cols[[vegetable]]
 
   # eyes - mirror ----
   eye_left <- data.frame(
@@ -42,17 +48,17 @@ carve_smile <- function(image) {
                         mapping = ggplot2::aes(x = !!dplyr::sym("x"),
                                                y = !!dplyr::sym("y")),
                         radius = grid::unit(0.012, "native"),
-                        color = "yellow", fill = "yellow") +
+                        color = my_col, fill = my_col) +
     ggforce::geom_shape(eye_right,
                         mapping = ggplot2::aes(x = !!dplyr::sym("x"),
                                                y = !!dplyr::sym("y")),
                         radius = grid::unit(0.012, "native"),
-                        color = "yellow", fill = "yellow") +
+                        color = my_col, fill = my_col) +
     ggforce::geom_shape(mouth,
                         mapping = ggplot2::aes(x = !!dplyr::sym("x"),
                                                y = !!dplyr::sym("y")),
                         radius = grid::unit(0.003, "native"),
-                        color = "yellow", fill = "yellow")
+                        color = my_col, fill = my_col)
 
   # return image ----
   return(p)

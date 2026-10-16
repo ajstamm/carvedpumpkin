@@ -26,9 +26,8 @@ draw_jackolantern <- function(message = "Happy Autumn!", carving = "face",
                               time = "night", season = "autumn",
                               vegetable = "pumpkin", font_size = 10) {
   # create background ----
-  image <- create_background(time = time, season = season)
-  image <- write_message(image, note = message, time = time,
-                         font_size = font_size)
+  image <- create_background(time = time, season = season) |>
+    write_message(note = message, time = time, font_size = font_size)
   # grow pumpkin ----
   if (vegetable == "pumpkin") {
     image <- grow_pumpkin(image)
@@ -37,13 +36,17 @@ draw_jackolantern <- function(message = "Happy Autumn!", carving = "face",
   }
   # carve pumpkin ----
   if (carving == "smile") {
-    image <- carve_smile(image)  |> add_candle(vertical_offset = -40)
+    image <- carve_smile(image, vegetable = vegetable) |>
+      add_candle(vertical_offset = -40)
   } else if (carving == "cat")   {
-    image <- carve_cat(image)   |> add_candle(vertical_offset = -20)
+    image <- carve_cat(image, vegetable = vegetable) |>
+      add_candle(vertical_offset = -20)
   } else if (carving == "ghost") {
-    image <- carve_ghost(image) |> add_candle(vertical_offset = -70)
+    image <- carve_ghost(image, vegetable = vegetable) |>
+      add_candle(vertical_offset = -70)
   } else if (carving == "bat")   {
-    image <- carve_bat(image)   |> add_candle(vertical_offset = -20)
+    image <- carve_bat(image, vegetable = vegetable) |>
+      add_candle(vertical_offset = -20)
   }
   # return image ----
   return(image)

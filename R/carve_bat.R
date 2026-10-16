@@ -1,6 +1,7 @@
 #' Carve a bat
 #'
-#' @param image Plot object; background and vegetable.
+#' @param image     Plot object; backdrop for the image.
+#' @param vegetable String; vegetable to carve. Accepts "pumpkin" and "turnip".
 #'
 #' This function carves a bat in the jack-o-lantern.
 #'
@@ -8,9 +9,14 @@
 #' create_background() |> grow_turnip() |> carve_bat()
 #'
 
-carve_bat <- function(image) {
+carve_bat <- function(image, vegetable = "pumpkin") {
   # bounds: x = 300:700, y = 180:250
   vertical_offset <- -40
+  cols <- list(
+    pumpkin = "goldenrod1",
+    turnip = "lavenderblush3"
+  )
+  my_col = cols[[vegetable]]
 
   # wings - mirror ----
   wing_left <- data.frame(
@@ -39,20 +45,20 @@ carve_bat <- function(image) {
                         mapping = ggplot2::aes(x = !!dplyr::sym("x"),
                                                y = !!dplyr::sym("y")),
                         radius = grid::unit(0.003, "native"),
-                        color = "yellow", fill = "yellow") +
-    ggforce::geom_ellipse(color = "yellow", fill = "yellow",
+                        color = my_col, fill = my_col) +
+    ggforce::geom_ellipse(color = my_col, fill = my_col,
                           ggplot2::aes(x0 = 500, y0 = 360 + vertical_offset,
                                        a = 30, b = 30, angle = 0)) +
     ggforce::geom_shape(ear_left,
                         mapping = ggplot2::aes(x = !!dplyr::sym("x"),
                                                y = !!dplyr::sym("y")),
                         radius = grid::unit(0, "native"),
-                        color = "yellow", fill = "yellow") +
+                        color = my_col, fill = my_col) +
     ggforce::geom_shape(ear_right,
                         mapping = ggplot2::aes(x = !!dplyr::sym("x"),
                                                y = !!dplyr::sym("y")),
                         radius = grid::unit(0, "native"),
-                        color = "yellow", fill = "yellow")
+                        color = my_col, fill = my_col)
 
   # return image ----
   return(p)

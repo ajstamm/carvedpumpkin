@@ -1,7 +1,8 @@
 #' Carve a cat
 #'
 #'
-#' @param image A ggplot object.
+#' @param image     Plot object; backdrop for the image.
+#' @param vegetable String; vegetable to carve. Accepts "pumpkin" and "turnip".
 #'
 #' This function carves a cat in the jack-o-lantern.
 #'
@@ -10,10 +11,15 @@
 #' carve_cat(image)
 #'
 
-carve_cat <- function(image) {
+carve_cat <- function(image, vegetable = "pumpkin") {
   # cat - on broom? or with hat?
   # bounds: x = 300:700, y = 180:250
   vertical_offset <- -40
+  cols <- list(
+    pumpkin = "goldenrod1",
+    turnip = "lavenderblush3"
+  )
+  my_col = cols[[vegetable]]
 
   xplus <- 320
   yplus <- 160 + vertical_offset
@@ -51,33 +57,33 @@ carve_cat <- function(image) {
                         mapping = ggplot2::aes(x = !!dplyr::sym("x"),
                                                y = !!dplyr::sym("y")),
                         radius = grid::unit(0.003, "native"),
-                        color = "yellow", fill = "yellow") +
+                        color = my_col, fill = my_col) +
     ggforce::geom_shape(tail,
                         mapping = ggplot2::aes(x = !!dplyr::sym("x"),
                                                y = !!dplyr::sym("y")),
                         radius = grid::unit(0.005, "native"),
-                        color = "yellow", fill = "yellow") +
+                        color = my_col, fill = my_col) +
     ggforce::geom_shape(body,
                         mapping = ggplot2::aes(x = !!dplyr::sym("x"),
                                                y = !!dplyr::sym("y")),
                         radius = grid::unit(0.02, "native"),
-                        color = "yellow", fill = "yellow") +
+                        color = my_col, fill = my_col) +
     # pumpkin: cat legs
     ggforce::geom_shape(leftfore,
                         mapping = ggplot2::aes(x = !!dplyr::sym("x"),
                                                y = !!dplyr::sym("y")),
                         radius = grid::unit(0.008, "native"),
-                        color = "yellow", fill = "yellow") +
+                        color = my_col, fill = my_col) +
     ggforce::geom_shape(rightfore,
                         mapping = ggplot2::aes(x = !!dplyr::sym("x"),
                                                y = !!dplyr::sym("y")),
                         radius = grid::unit(0.01, "native"),
-                        color = "yellow", fill = "yellow") +
+                        color = my_col, fill = my_col) +
     ggforce::geom_shape(hind,
                         mapping = ggplot2::aes(x = !!dplyr::sym("x"),
                                                y = !!dplyr::sym("y")),
                         radius = grid::unit(0.01, "native"),
-                        color = "yellow", fill = "yellow")
+                        color = my_col, fill = my_col)
 
   # return image ----
   return(p)

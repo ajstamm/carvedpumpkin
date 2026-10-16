@@ -1,6 +1,7 @@
 #' Carve a ghost
 #'
-#' @param image A ggplot object.
+#' @param image     Plot object; backdrop for the image.
+#' @param vegetable String; vegetable to carve. Accepts "pumpkin" and "turnip".
 #'
 #' This function carves a ghost in the jack-o-lantern.
 #'
@@ -9,9 +10,14 @@
 #' carve_ghost(image)
 #'
 
-carve_ghost <- function(image) {
+carve_ghost <- function(image, vegetable = "pumpkin") {
   # bounds: x = 300:700, y = 180:250
   vertical_offset <- -40
+  cols <- list(
+    pumpkin = "goldenrod1",
+    turnip = "lavenderblush3"
+  )
+  my_col = cols[[vegetable]]
 
   # body - mirror ----
   body_left <- data.frame(
@@ -34,8 +40,8 @@ carve_ghost <- function(image) {
                         mapping = ggplot2::aes(x = !!dplyr::sym("x"),
                                                y = !!dplyr::sym("y")),
                         radius = grid::unit(0.003, "native"),
-                        color = "yellow", fill = "yellow") +
-    ggforce::geom_ellipse(color = "yellow", fill = "yellow",
+                        color = my_col, fill = my_col) +
+    ggforce::geom_ellipse(color = my_col, fill = my_col,
                           ggplot2::aes(x0 = 500, y0 = 400 + vertical_offset,
                                        a = 30, b = 50, angle = 0))
 
