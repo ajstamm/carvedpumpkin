@@ -6,7 +6,7 @@
 \usage{
 draw_jackolantern(
   message = "Happy Autumn!",
-  carving = "face",
+  carving = "smile",
   time = "night",
   season = "autumn",
   vegetable = "pumpkin",

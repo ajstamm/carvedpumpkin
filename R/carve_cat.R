@@ -3,6 +3,8 @@
 #'
 #' @param image     Plot object; backdrop for the image.
 #' @param vegetable String; vegetable to carve. Accepts "pumpkin" and "turnip".
+#' @param bg        String; color for the carving fill.
+#' @param col       String; color for the carving border.
 #'
 #' This function carves a cat in the jack-o-lantern.
 #'
@@ -11,16 +13,11 @@
 #' carve_cat(image)
 #'
 
-carve_cat <- function(image, vegetable = "pumpkin") {
+carve_cat <- function(image, vegetable = "pumpkin", bg = "gold",
+                      col = "orange") {
   # cat - on broom? or with hat?
   # bounds: x = 300:700, y = 180:250
   vertical_offset <- -40
-  cols <- list(
-    pumpkin = "goldenrod1",
-    turnip = "lavenderblush3"
-  )
-  my_col = cols[[vegetable]]
-
   xplus <- 320
   yplus <- 160 + vertical_offset
   # legs ----
@@ -57,33 +54,33 @@ carve_cat <- function(image, vegetable = "pumpkin") {
                         mapping = ggplot2::aes(x = !!dplyr::sym("x"),
                                                y = !!dplyr::sym("y")),
                         radius = grid::unit(0.003, "native"),
-                        color = my_col, fill = my_col) +
+                        color = "transparent", fill = bg) +
     ggforce::geom_shape(tail,
                         mapping = ggplot2::aes(x = !!dplyr::sym("x"),
                                                y = !!dplyr::sym("y")),
                         radius = grid::unit(0.005, "native"),
-                        color = my_col, fill = my_col) +
-    ggforce::geom_shape(body,
-                        mapping = ggplot2::aes(x = !!dplyr::sym("x"),
-                                               y = !!dplyr::sym("y")),
-                        radius = grid::unit(0.02, "native"),
-                        color = my_col, fill = my_col) +
+                        color = "transparent", fill = bg) +
     # pumpkin: cat legs
-    ggforce::geom_shape(leftfore,
-                        mapping = ggplot2::aes(x = !!dplyr::sym("x"),
-                                               y = !!dplyr::sym("y")),
-                        radius = grid::unit(0.008, "native"),
-                        color = my_col, fill = my_col) +
     ggforce::geom_shape(rightfore,
                         mapping = ggplot2::aes(x = !!dplyr::sym("x"),
                                                y = !!dplyr::sym("y")),
                         radius = grid::unit(0.01, "native"),
-                        color = my_col, fill = my_col) +
+                        color = col, fill = bg) +
+    ggforce::geom_shape(leftfore,
+                        mapping = ggplot2::aes(x = !!dplyr::sym("x"),
+                                               y = !!dplyr::sym("y")),
+                        radius = grid::unit(0.008, "native"),
+                        color = "transparent", fill = bg) +
     ggforce::geom_shape(hind,
                         mapping = ggplot2::aes(x = !!dplyr::sym("x"),
                                                y = !!dplyr::sym("y")),
                         radius = grid::unit(0.01, "native"),
-                        color = my_col, fill = my_col)
+                        color = col, fill = bg) +
+    ggforce::geom_shape(body,
+                        mapping = ggplot2::aes(x = !!dplyr::sym("x"),
+                                               y = !!dplyr::sym("y")),
+                        radius = grid::unit(0.02, "native"),
+                        color = bg, fill = bg)
 
   # return image ----
   return(p)
